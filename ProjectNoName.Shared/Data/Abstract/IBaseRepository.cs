@@ -26,5 +26,9 @@ namespace ProjectNoName.Shared.Data.Abstract
         Task<bool> DeleteAsync(T entity);
 
         Task<T> UpdateAsync(T entity);
+        IQueryable<T> All();
+        Task<T> GetAsync(int id);
+
+        Task<bool> AnyAsync(int id);
     }
 }
