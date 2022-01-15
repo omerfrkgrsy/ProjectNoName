@@ -1,19 +1,19 @@
-﻿using ProjectNoName.Shared.Data.Abstract;
-using ProjectNoName.Shared.Entity;
-using ProjectNoName.Shared.Service.Abstract;
+﻿using ProjectNoName.Core.Data.Abstract;
+using ProjectNoName.Core.Entity;
+using ProjectNoName.Core.Service.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectNoName.Shared.Service.Concrete
+namespace ProjectNoName.Core.Service.Concrete
 {
     public abstract class AbstractDalService<T>:IBaseService<T> where T : class, IEntity,new()
     {
-        public IBaseRepository<T> _dal;
+        public IEfBaseRepository<T> _dal;
 
-        public AbstractDalService(IBaseRepository<T> dal)
+        public AbstractDalService(IEfBaseRepository<T> dal)
         {
             _dal = dal;
         }

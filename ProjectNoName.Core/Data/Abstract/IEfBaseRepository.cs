@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
-using ProjectNoName.Shared.Entity;
+using ProjectNoName.Core.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +7,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectNoName.Shared.Data.Abstract
+namespace ProjectNoName.Core.Data.Abstract
 {
-    public interface IBaseRepository<T> where T : class ,IEntity, new()
+    public interface IEfBaseRepository<T> where T : class ,IEntity, new()
     {
         IDbContextTransaction BeginTransaction();
 
@@ -26,7 +26,9 @@ namespace ProjectNoName.Shared.Data.Abstract
         Task<bool> DeleteAsync(T entity);
 
         Task<T> UpdateAsync(T entity);
+
         IQueryable<T> All();
+
         Task<T> GetAsync(int id);
 
         Task<bool> AnyAsync(int id);

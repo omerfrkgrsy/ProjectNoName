@@ -1,5 +1,5 @@
 ﻿using ProjectNoName.Entities.Concrete;
-using ProjectNoName.Shared.Data.Abstract;
+using ProjectNoName.Core.Data.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProjectNoName.Data.Abstract
 {
-    public interface IUserRepository : IBaseRepository<User>
+    public interface IUserRepository : IEfBaseRepository<User>
     {
 
     }

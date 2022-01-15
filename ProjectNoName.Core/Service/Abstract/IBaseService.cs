@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectNoName.Shared.Service.Abstract
+namespace ProjectNoName.Core.Service.Abstract
 {
     public interface IBaseService<T>
     {

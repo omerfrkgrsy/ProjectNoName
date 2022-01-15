@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
-using ProjectNoName.Shared.Data.Abstract;
-using ProjectNoName.Shared.Entity;
+using ProjectNoName.Core.Data.Abstract;
+using ProjectNoName.Core.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +10,13 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectNoName.Shared.Data.Concrete
+namespace ProjectNoName.Core.Data.Concrete
 {
-    public class BaseRepository<T> :IBaseRepository<T> where T : class, IEntity, new()
+    public class EfBaseRepository<T> :IEfBaseRepository<T> where T : class, IEntity, new()
     {
         protected readonly DbContext _context;
 
-        public BaseRepository(DbContext context)
+        public EfBaseRepository(DbContext context)
         {
             this._context = context;
         }

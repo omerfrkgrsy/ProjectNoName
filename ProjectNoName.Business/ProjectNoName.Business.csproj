@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ProjectNoName.Data\ProjectNoName.Data.csproj" />
     <ProjectReference Include="..\ProjectNoName.Entities\ProjectNoName.Entities.csproj" />
-    <ProjectReference Include="..\ProjectNoName.Shared\ProjectNoName.Shared.csproj" />
+    <ProjectReference Include="..\ProjectNoName.Core\ProjectNoName.Core.csproj" />
   </ItemGroup>
 
 </Project>

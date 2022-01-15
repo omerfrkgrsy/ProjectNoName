@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ProjectNoName.Business.Abstract;
 using ProjectNoName.Entities.Concrete;
-using ProjectNoName.Service.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
