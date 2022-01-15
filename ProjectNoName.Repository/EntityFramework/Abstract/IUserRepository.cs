@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectNoName.Data.Abstract
+namespace ProjectNoName.Repository.Abstract
 {
     public interface IUserRepository : IEfBaseRepository<User>
     {

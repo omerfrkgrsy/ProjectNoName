@@ -5,9 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ProjectNoName.Data\ProjectNoName.Data.csproj" />
     <ProjectReference Include="..\ProjectNoName.Entities\ProjectNoName.Entities.csproj" />
     <ProjectReference Include="..\ProjectNoName.Core\ProjectNoName.Core.csproj" />
+    <ProjectReference Include="..\ProjectNoName.Repository\ProjectNoName.Repository.csproj" />
   </ItemGroup>
 
 </Project>
