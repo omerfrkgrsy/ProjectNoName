@@ -1,18 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ProjectNoName.Repository.Abstract;
-using ProjectNoName.Entities.Concrete;
+﻿using ProjectNoName.Entities.Concrete;
 using ProjectNoName.Core.Data.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ProjectNoName.Repository.EntityFramework.Context;
+using ProjectNoName.Repository.EntityFramework.Abstract;
 
-namespace ProjectNoName.Repository.Concrete
+namespace ProjectNoName.Repository.EntityFramework.Concrete
 {
     public class UserRepository : EfBaseRepository<User>,IUserRepository
     {
-        public UserRepository(DbContext context) : base(context)
+        public UserRepository(DataContext context) : base(context)
         {
         }
         

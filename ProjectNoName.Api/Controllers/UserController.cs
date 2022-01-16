@@ -24,5 +24,11 @@ namespace ProjectNoName.Api.Controllers
         {
             return Ok(await _userService.GetAll());
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Insert([FromBody] User user)
+        {
+            return Ok(await _userService.Insert(user));
+        }
     }
 }

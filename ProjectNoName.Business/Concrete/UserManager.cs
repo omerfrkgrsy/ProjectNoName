@@ -1,12 +1,7 @@
 ﻿using ProjectNoName.Entities.Concrete;
 using ProjectNoName.Core.Service.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ProjectNoName.Business.Abstract;
-using ProjectNoName.Repository.Abstract;
+using ProjectNoName.Repository.EntityFramework.Abstract;
 
 namespace ProjectNoName.Business.Concrete
 {
