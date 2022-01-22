@@ -26,9 +26,21 @@ namespace ProjectNoName.Core.Data.Concrete
             return _context.Database.BeginTransaction();
         }
 
-        public async Task<IList<T>> AllAsync()
+        public async Task<IList<T>> AllAsync(Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[] includeProperties)
         {
-            return await _context.Set<T>().ToListAsync();
+            IQueryable<T> query = _context.Set<T>();
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
+            if (includeProperties.Any())
+            {
+                foreach (var includeProperty in includeProperties)
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+            return await query.ToListAsync();
         }
 
         public async Task<IList<T>> WhereAsync(Expression<Func<T, bool>> where)

@@ -13,22 +13,22 @@ namespace ProjectNoName.Api.Controllers
     [Route("[controller]")]
     public class PostController : ControllerBase
     {
-        readonly IPostService _postService;
-        public PostController(IPostService postService)
+        readonly IPostService _service;
+        public PostController(IPostService service)
         {
-            _postService = postService;
+            _service = service;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _postService.GetAll());
+            return Ok(await _service.GetAll(null,x=>x.Comments,x=>x.User));
         }
 
         [HttpPost]
         public async Task<IActionResult> Insert([FromBody] Post post)
         {
-            return Ok(await _postService.Insert(post));
+            return Ok(await _service.Insert(post));
         }
     }
 }

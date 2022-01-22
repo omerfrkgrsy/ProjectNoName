@@ -24,21 +24,26 @@ namespace ProjectNoName.Repository.EntityFramework.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Post>()
-                .HasOne(p => p.User)
-                .WithMany(b => b.Posts)
-                .HasForeignKey(p => p.UserId);
+            modelBuilder.Entity<Post>(b =>
+            {
+                b.HasKey(x => x.Id);
+                b.HasOne(p => p.User).WithMany(t => t.Posts).HasForeignKey(p => p.UserId);
+                b.HasMany(j => j.SubPosts).WithOne(j => j.Parent).HasForeignKey(j => j.ParentId);
+            });
 
-            modelBuilder.Entity<Comment>()
-               .HasOne(p => p.Post)
-               .WithMany(b => b.Comments)
-               .HasForeignKey(p => p.PostId);
+            modelBuilder.Entity<Comment>(b =>
+            {
+                b.HasKey(x => x.Id);
+                b.HasOne(p => p.Post).WithMany(t => t.Comments).HasForeignKey(p => p.PostId);
+                b.HasOne(p => p.User).WithMany(t => t.Comments).HasForeignKey(p => p.UserId);
+            });
 
-            modelBuilder.Entity<Comment>()
-               .HasOne(p => p.User)
-               .WithMany(b => b.Comments)
-               .HasForeignKey(p => p.UserId);
-
+            modelBuilder.Entity<User>(b =>
+            {
+                b.HasKey(x => x.Id);
+                b.HasMany(x => x.Followers);
+                b.HasMany(x => x.Followed);
+            });
 
         }
     }

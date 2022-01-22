@@ -18,7 +18,9 @@ namespace ProjectNoName.Entities.Concrete
         public string Surname { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public List<Post> Posts { get; set; }
-        public List<Comment> Comments { get; set; }
+        public virtual ICollection<Post> Posts { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<User> Followers { get; set; }
+        public virtual ICollection<User> Followed { get; set; }
     }
 }

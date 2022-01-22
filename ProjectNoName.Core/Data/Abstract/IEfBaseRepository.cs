@@ -13,7 +13,7 @@ namespace ProjectNoName.Core.Data.Abstract
     {
         IDbContextTransaction BeginTransaction();
 
-        Task<IList<T>> AllAsync();
+        Task<IList<T>> AllAsync(Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[] includeProperties);
 
         Task<IList<T>> WhereAsync(Expression<Func<T, bool>> where);
 

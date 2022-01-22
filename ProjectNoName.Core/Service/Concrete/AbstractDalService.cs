@@ -4,6 +4,7 @@ using ProjectNoName.Core.Service.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -42,9 +43,9 @@ namespace ProjectNoName.Core.Service.Concrete
             return await _dal.GetAsync(id);
         }
 
-        public async virtual Task<IList<T>> GetAll()
+        public async virtual Task<IList<T>> GetAll(Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[] includeProperties)
         {
-            return await _dal.AllAsync();
+            return await _dal.AllAsync(predicate,includeProperties);
         }
 
         public virtual IQueryable<T> GetAllQueryable()

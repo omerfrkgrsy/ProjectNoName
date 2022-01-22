@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -12,7 +13,7 @@ namespace ProjectNoName.Core.Service.Abstract
 
         Task<bool> Delete(int id);
 
-        Task<IList<T>> GetAll();
+        Task<IList<T>> GetAll(Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[] includeProperties);
 
         Task<T> Insert(T entity);
 

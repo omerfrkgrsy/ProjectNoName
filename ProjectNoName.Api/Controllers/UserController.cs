@@ -22,7 +22,7 @@ namespace ProjectNoName.Api.Controllers
         [HttpGet()]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _userService.GetAll());
+            return Ok(await _userService.GetAll(null,x=>x.Posts,x=>x.Followed,x=>x.Followers));
         }
 
         [HttpPost]

@@ -5,11 +5,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using ProjectNoName.Business.Abstract;
 using ProjectNoName.Business.Concrete;
 using ProjectNoName.Repository.EntityFramework.Abstract;
 using ProjectNoName.Repository.EntityFramework.Concrete;
 using ProjectNoName.Repository.EntityFramework.Context;
+using System.Text.Json.Serialization;
 
 namespace ProjectNoName.Api
 {
@@ -25,16 +27,27 @@ namespace ProjectNoName.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(
+                options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            );
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProjectNoName.Api", Version = "v1" });
             });
             services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("ProjectDB"), b => b.MigrationsAssembly("ProjectNoName.Api")));
 
+            //services.AddControllers()
+            //.AddJsonOptions(o =>
+            //    o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles
+            //);
+
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserManager>();
-
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IPostService, PostManager>();
+            services.AddScoped<ICommentRepository, CommentRepository>();
+            services.AddScoped<ICommentService, CommentManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

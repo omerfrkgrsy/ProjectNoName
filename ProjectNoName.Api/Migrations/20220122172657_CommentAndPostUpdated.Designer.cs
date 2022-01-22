@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ProjectNoName.Repository.EntityFramework.Context;
@@ -11,9 +12,10 @@ using ProjectNoName.Repository.EntityFramework.Context;
 namespace ProjectNoName.Api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220122172657_CommentAndPostUpdated")]
+    partial class CommentAndPostUpdated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,6 +85,9 @@ namespace ProjectNoName.Api.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("text");
+
                     b.Property<string>("Image")
                         .HasColumnType("text");
 
@@ -150,21 +155,6 @@ namespace ProjectNoName.Api.Migrations
                     b.ToTable("USER");
                 });
 
-            modelBuilder.Entity("UserUser", b =>
-                {
-                    b.Property<int>("FollowedId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("FollowersId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("FollowedId", "FollowersId");
-
-                    b.HasIndex("FollowersId");
-
-                    b.ToTable("UserUser");
-                });
-
             modelBuilder.Entity("ProjectNoName.Entities.Concrete.Comment", b =>
                 {
                     b.HasOne("ProjectNoName.Entities.Concrete.Post", "Post")
@@ -201,21 +191,6 @@ namespace ProjectNoName.Api.Migrations
                     b.Navigation("Parent");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("UserUser", b =>
-                {
-                    b.HasOne("ProjectNoName.Entities.Concrete.User", null)
-                        .WithMany()
-                        .HasForeignKey("FollowedId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjectNoName.Entities.Concrete.User", null)
-                        .WithMany()
-                        .HasForeignKey("FollowersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProjectNoName.Entities.Concrete.Post", b =>
