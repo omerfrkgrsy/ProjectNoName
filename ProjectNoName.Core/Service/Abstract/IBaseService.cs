@@ -13,6 +13,7 @@ namespace ProjectNoName.Core.Service.Abstract
         Task<bool> Delete(int id);
 
         Task<IList<T>> GetAll();
+
         Task<T> Insert(T entity);
 
         Task<T> Update(T entity);

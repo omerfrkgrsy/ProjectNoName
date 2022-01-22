@@ -11,24 +11,24 @@ namespace ProjectNoName.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class CommentController : ControllerBase
     {
-        readonly IUserService _userService;
-        public UserController(IUserService userService)
+        readonly ICommentService _commentService;
+        public CommentController(ICommentService commentService)
         {
-            _userService = userService;
+            _commentService = commentService;
         }
 
-        [HttpGet()]
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _userService.GetAll());
+            return Ok(await _commentService.GetAll());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Insert([FromBody] User user)
+        public async Task<IActionResult> Insert([FromBody] Comment comment)
         {
-            return Ok(await _userService.Insert(user));
+            return Ok(await _commentService.Insert(comment));
         }
     }
 }

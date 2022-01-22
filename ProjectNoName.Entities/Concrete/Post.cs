@@ -8,17 +8,18 @@ using System.Threading.Tasks;
 
 namespace ProjectNoName.Entities.Concrete
 {
-    [Table("USER")]
-    public class User : EntityBase,IEntity
+    [Table("POST")]
+    public class Post : EntityBase,IEntity
     {
         public int Id { get; set; }
-        public string UserName { get; set; }
-        public string Pasword { get; set; }
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Phone { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public string Image { get; set; }
+        public string Audio { get; set; }
+        public string UserId { get; set; }
         public string Email { get; set; }
-        public List<Post> Posts { get; set; }
+        public User User { get; set; }
         public List<Comment> Comments { get; set; }
+
     }
 }

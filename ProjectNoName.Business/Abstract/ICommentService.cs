@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ProjectNoName.Business.Abstract
 {
-    public interface IUserService:IBaseService<User>
+    public interface ICommentService:IBaseService<Comment>
     {
 
     }

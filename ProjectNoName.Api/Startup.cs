@@ -22,7 +22,6 @@ namespace ProjectNoName.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -32,7 +31,6 @@ namespace ProjectNoName.Api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ProjectNoName.Api", Version = "v1" });
             });
             services.AddDbContext<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("ProjectDB"), b => b.MigrationsAssembly("ProjectNoName.Api")));
-            //services.AddDbContextPool<DataContext>(options => options.UseNpgsql(Configuration.GetConnectionString("ProjectDB")).EnableSensitiveDataLogging());
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserService, UserManager>();

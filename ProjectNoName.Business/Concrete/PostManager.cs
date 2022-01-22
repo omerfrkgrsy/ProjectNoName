@@ -5,9 +5,9 @@ using ProjectNoName.Repository.EntityFramework.Abstract;
 
 namespace ProjectNoName.Business.Concrete
 {
-    public class UserManager : AbstractDalService<User>,IUserService
+    public class PostManager : AbstractDalService<Post>,IPostService
     {
-        public UserManager(IUserRepository dal) :base(dal)
+        public PostManager(IPostRepository dal) :base(dal)
         {
 
         }
