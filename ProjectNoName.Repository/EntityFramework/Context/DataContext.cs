@@ -21,5 +21,25 @@ namespace ProjectNoName.Repository.EntityFramework.Context
         {
             return base.SaveChanges();
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Post>()
+                .HasOne(p => p.User)
+                .WithMany(b => b.Posts)
+                .HasForeignKey(p => p.UserId);
+
+            modelBuilder.Entity<Comment>()
+               .HasOne(p => p.Post)
+               .WithMany(b => b.Comments)
+               .HasForeignKey(p => p.PostId);
+
+            modelBuilder.Entity<Comment>()
+               .HasOne(p => p.User)
+               .WithMany(b => b.Comments)
+               .HasForeignKey(p => p.UserId);
+
+
+        }
     }
 }

@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ProjectNoName.Api.Migrations
 {
-    public partial class CommentAndPostCreated : Migration
+    public partial class CommentAndPostCreated3 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,9 +20,8 @@ namespace ProjectNoName.Api.Migrations
                     Content = table.Column<string>(type: "text", nullable: true),
                     Image = table.Column<string>(type: "text", nullable: true),
                     Audio = table.Column<string>(type: "text", nullable: true),
-                    UserId = table.Column<string>(type: "text", nullable: true),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: true),
-                    UserId1 = table.Column<int>(type: "integer", nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
@@ -31,10 +30,11 @@ namespace ProjectNoName.Api.Migrations
                 {
                     table.PrimaryKey("PK_POST", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_POST_USER_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_POST_USER_UserId",
+                        column: x => x.UserId,
                         principalTable: "USER",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -45,12 +45,10 @@ namespace ProjectNoName.Api.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "text", nullable: true),
                     Content = table.Column<string>(type: "text", nullable: true),
-                    UserId = table.Column<string>(type: "text", nullable: true),
-                    PostId = table.Column<string>(type: "text", nullable: true),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    PostId = table.Column<int>(type: "integer", nullable: false),
                     Image = table.Column<string>(type: "text", nullable: true),
                     Audio = table.Column<string>(type: "text", nullable: true),
-                    PostId1 = table.Column<int>(type: "integer", nullable: true),
-                    UserId1 = table.Column<int>(type: "integer", nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     ModifiedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
@@ -59,31 +57,33 @@ namespace ProjectNoName.Api.Migrations
                 {
                     table.PrimaryKey("PK_COMMENT", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_COMMENT_POST_PostId1",
-                        column: x => x.PostId1,
+                        name: "FK_COMMENT_POST_PostId",
+                        column: x => x.PostId,
                         principalTable: "POST",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_COMMENT_USER_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_COMMENT_USER_UserId",
+                        column: x => x.UserId,
                         principalTable: "USER",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_COMMENT_PostId1",
+                name: "IX_COMMENT_PostId",
                 table: "COMMENT",
-                column: "PostId1");
+                column: "PostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_COMMENT_UserId1",
+                name: "IX_COMMENT_UserId",
                 table: "COMMENT",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_POST_UserId1",
+                name: "IX_POST_UserId",
                 table: "POST",
-                column: "UserId1");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

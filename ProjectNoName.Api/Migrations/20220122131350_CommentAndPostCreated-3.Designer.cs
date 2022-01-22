@@ -12,8 +12,8 @@ using ProjectNoName.Repository.EntityFramework.Context;
 namespace ProjectNoName.Api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220122110438_CommentAndPostCreated")]
-    partial class CommentAndPostCreated
+    [Migration("20220122131350_CommentAndPostCreated-3")]
+    partial class CommentAndPostCreated3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,26 +50,20 @@ namespace ProjectNoName.Api.Migrations
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("PostId")
-                        .HasColumnType("text");
-
-                    b.Property<int?>("PostId1")
+                    b.Property<int>("PostId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
-
-                    b.Property<int?>("UserId1")
+                    b.Property<int>("UserId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PostId1");
+                    b.HasIndex("PostId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("COMMENT");
                 });
@@ -106,15 +100,12 @@ namespace ProjectNoName.Api.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
-
-                    b.Property<int?>("UserId1")
+                    b.Property<int>("UserId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("POST");
                 });
@@ -163,20 +154,28 @@ namespace ProjectNoName.Api.Migrations
                 {
                     b.HasOne("ProjectNoName.Entities.Concrete.Post", "Post")
                         .WithMany("Comments")
-                        .HasForeignKey("PostId1");
+                        .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("ProjectNoName.Entities.Concrete.User", null)
+                    b.HasOne("ProjectNoName.Entities.Concrete.User", "User")
                         .WithMany("Comments")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Post");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("ProjectNoName.Entities.Concrete.Post", b =>
                 {
                     b.HasOne("ProjectNoName.Entities.Concrete.User", "User")
                         .WithMany("Posts")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
