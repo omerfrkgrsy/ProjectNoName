@@ -20,5 +20,6 @@ namespace ProjectNoName.Core.Service.Abstract
         Task<T> Update(T entity);
 
         Task<bool> CheckById(int id);
+        IQueryable<T> GetAllQueryable();
     }
 }

@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProjectNoName.Business.Abstract;
+using ProjectNoName.Business.Dto;
 using ProjectNoName.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -14,9 +16,11 @@ namespace ProjectNoName.Api.Controllers
     public class UserController : ControllerBase
     {
         readonly IUserService _userService;
-        public UserController(IUserService userService)
+        readonly IMapper _mapper;
+        public UserController(IUserService userService, IMapper mapper)
         {
             _userService = userService;
+            _mapper = mapper;
         }
 
         [HttpGet()]
@@ -29,6 +33,12 @@ namespace ProjectNoName.Api.Controllers
         public async Task<IActionResult> Insert([FromBody] User user)
         {
             return Ok(await _userService.Insert(user));
+        }
+
+        [HttpPost("Register")]
+        public async Task<IActionResult> UserRegister([FromBody] UserRegisterDto userRegisterDto)
+        {
+            return Ok(await _userService.Insert(_mapper.Map<User>(userRegisterDto)));
         }
     }
 }
