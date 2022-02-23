@@ -18,10 +18,9 @@ namespace ProjectNoName.Core.Service.Concrete
         {
             _dal = dal;
         }
-
         public async Task<bool> CheckById(int id)
         {
-            return await _dal.AnyAsync(id);
+            return await _dal.AnyAsync(x=>x.Id == id);
         }
 
         public async virtual Task<bool> Delete(int id)
@@ -60,6 +59,10 @@ namespace ProjectNoName.Core.Service.Concrete
         public async virtual Task<T> Update(T entity)
         {
             return await _dal.UpdateAsync(entity);
+        }
+        public async virtual Task<bool> AnyAsync(Expression<Func<T, bool>> predicate = null)
+        {
+            return await _dal.AnyAsync(predicate);
         }
     }
 }

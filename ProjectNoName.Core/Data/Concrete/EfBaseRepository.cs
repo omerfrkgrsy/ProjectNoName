@@ -88,9 +88,9 @@ namespace ProjectNoName.Core.Data.Concrete
         {
             return this._context.Set<T>();
         }
-        public async Task<bool> AnyAsync(int id)
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> where=null)
         {
-            return await _context.Set<T>().AnyAsync(x => x.Id == id);
+            return await _context.Set<T>().AnyAsync(where);
         }
 
     }

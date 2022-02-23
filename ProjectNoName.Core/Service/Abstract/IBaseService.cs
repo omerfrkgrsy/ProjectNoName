@@ -21,5 +21,6 @@ namespace ProjectNoName.Core.Service.Abstract
 
         Task<bool> CheckById(int id);
         IQueryable<T> GetAllQueryable();
+        Task<bool> AnyAsync(Expression<Func<T, bool>>? predicate = null);
     }
 }
