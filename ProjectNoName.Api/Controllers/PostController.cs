@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ProjectNoName.Business.Abstract;
+using ProjectNoName.Business.Dto;
 using ProjectNoName.Core.Results;
 using ProjectNoName.Entities.Concrete;
 using System;
@@ -25,8 +26,8 @@ namespace ProjectNoName.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var data = await _service.GetAllQueryable().Include(x => x.Comments).Include(x => x.User).ToListAsync();
-            return Ok(new DataResult<List<Post>>(data, true, "Post Data Listed."));
+            var data = await _service.GetList();
+            return Ok(new DataResult<List<PostListDto>>(data, true, "Post Data Listed."));
         }
 
         [HttpPost]
