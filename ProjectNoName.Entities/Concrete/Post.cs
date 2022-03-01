@@ -17,7 +17,7 @@ namespace ProjectNoName.Entities.Concrete
         public string Image { get; set; }
         public string Audio { get; set; }
         public int UserId { get; set; }
-        public int ParentId { get; set; }
+        public int? ParentId { get; set; }
         public User User { get; set; }
         public List<Comment> Comments { get; set; }
         public Post Parent { get; set; }

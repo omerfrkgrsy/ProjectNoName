@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ProjectNoName.Business.Abstract;
+using ProjectNoName.Core.Results;
 using ProjectNoName.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace ProjectNoName.Api.Controllers
 {
@@ -22,13 +25,16 @@ namespace ProjectNoName.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _service.GetAll(null,x=>x.Comments,x=>x.User));
+            var data = await _service.GetAllQueryable().Include(x => x.Comments).Include(x => x.User).ToListAsync();
+            return Ok(new DataResult<List<Post>>(data, true, "Post Data Listed."));
         }
 
         [HttpPost]
         public async Task<IActionResult> Insert([FromBody] Post post)
         {
-            return Ok(await _service.Insert(post));
+            var insertData = await _service.Insert(post);
+
+            return Ok(new Result(true,"Post Added."));
         }
     }
 }

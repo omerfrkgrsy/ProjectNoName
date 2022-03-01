@@ -13,8 +13,6 @@ namespace ProjectNoName.Core.Service.Abstract
 
         Task<bool> Delete(int id);
 
-        Task<IList<T>> GetAll(Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[] includeProperties);
-
         Task<T> Insert(T entity);
 
         Task<T> Update(T entity);

@@ -6,6 +6,7 @@ using ProjectNoName.Business.Dto;
 using ProjectNoName.Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@ namespace ProjectNoName.Api.Controllers
         [HttpGet()]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _userService.GetAll(null,x=>x.Posts,x=>x.Followed,x=>x.Followers));
+            return Ok(await _userService.GetAllQueryable().Include(x=>x.Posts).Include(x=>x.Followed).Include(x=>x.Followers).ToListAsync());
         }
 
         [HttpPost]

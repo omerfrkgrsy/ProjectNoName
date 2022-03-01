@@ -12,9 +12,6 @@ namespace ProjectNoName.Core.Data.Abstract
     public interface IEfBaseRepository<T> where T : class ,IEntity, new()
     {
         IDbContextTransaction BeginTransaction();
-        Task<IList<T>> AllAsync(Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[] includeProperties);
-        Task<IList<T>> WhereAsync(Expression<Func<T, bool>> where);
-        Task<IList<T>> OrderByAsync<TKey>(Expression<Func<T, TKey>> orderBy, bool isDesc);
         Task<int> SaveAsync();
         Task<T> AddAsync(T entity);
         Task<bool> DeleteAsync(T entity);

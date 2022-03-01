@@ -42,11 +42,6 @@ namespace ProjectNoName.Core.Service.Concrete
             return await _dal.GetAsync(id);
         }
 
-        public async virtual Task<IList<T>> GetAll(Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[] includeProperties)
-        {
-            return await _dal.AllAsync(predicate,includeProperties);
-        }
-
         public virtual IQueryable<T> GetAllQueryable()
         {
             return _dal.All();

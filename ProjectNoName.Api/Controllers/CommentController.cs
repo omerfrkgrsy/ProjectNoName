@@ -4,6 +4,7 @@ using ProjectNoName.Business.Abstract;
 using ProjectNoName.Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -22,7 +23,7 @@ namespace ProjectNoName.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _commentService.GetAll());
+            return Ok(await _commentService.GetAllQueryable().ToListAsync());
         }
 
         [HttpPost]

@@ -26,36 +26,6 @@ namespace ProjectNoName.Core.Data.Concrete
             return _context.Database.BeginTransaction();
         }
 
-        public async Task<IList<T>> AllAsync(Expression<Func<T, bool>>? predicate = null, params Expression<Func<T, object>>[] includeProperties)
-        {
-            IQueryable<T> query = _context.Set<T>();
-            if (predicate != null)
-            {
-                query = query.Where(predicate);
-            }
-            if (includeProperties.Any())
-            {
-                foreach (var includeProperty in includeProperties)
-                {
-                    query = query.Include(includeProperty);
-                }
-            }
-            return await query.ToListAsync();
-        }
-
-        public async Task<IList<T>> WhereAsync(Expression<Func<T, bool>> where)
-        {
-            return await _context.Set<T>().Where(where).ToListAsync();
-        }
-
-        public async Task<IList<T>> OrderByAsync<TKey>(Expression<Func<T, TKey>> orderBy, bool isDesc)
-        {
-            if (isDesc)
-                return await _context.Set<T>().OrderByDescending(orderBy).ToListAsync();
-
-            return await _context.Set<T>().OrderBy(orderBy).ToListAsync();
-        }
-
         public async Task<int> SaveAsync()
         {
             return await this._context.SaveChangesAsync();
@@ -84,9 +54,12 @@ namespace ProjectNoName.Core.Data.Concrete
         {
             return await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
         }
-        public  IQueryable<T> All()
+        public IQueryable<T> All()
         {
-            return this._context.Set<T>();
+            DbSet<T> dbSet = _context.Set<T>();
+
+            IQueryable<T> query = dbSet.AsQueryable();
+            return query;
         }
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> where=null)
         {
