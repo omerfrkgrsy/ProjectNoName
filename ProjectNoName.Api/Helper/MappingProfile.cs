@@ -18,7 +18,7 @@ namespace ProjectNoName.Api.Helper
             CreateMap<PostCreateDto, Post>();
             CreateMap<FollowDto, RelationShip>().ForMember(dest => dest.FollewerId, src => src.MapFrom(s => s.FollewedId))
                                                 .ForMember(dest => dest.FollowedId, src => src.MapFrom(s => s.Id))
-                                                .AfterMap((src, dest) => dest.IsActive = false);
+                                                .AfterMap((src, dest) => dest.isBlocked = false);
         }
 
     }
