@@ -38,12 +38,12 @@ namespace ProjectNoName.Business.ValidationRules.FluentValidation
 				.Must(isEmailExist)
 				.WithMessage("Email zaten var.");
 
-			RuleFor(x => x.Pasword)
+			RuleFor(x => x.Password)
 				.NotNull()
 				.WithMessage("Şifre boş olamaz.")
 				.Length(8,16)
 				.WithMessage("Şifre 8-16 karakter arasında olmalıdır.")
-				.Equal(x=>x.RePasword)
+				.Equal(x=>x.RePassword)
 				.WithMessage("Şifre ile şifre tekrarı uyuşmuyor.");
 
 		}

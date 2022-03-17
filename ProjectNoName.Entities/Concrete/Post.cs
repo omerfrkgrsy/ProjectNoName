@@ -19,9 +19,9 @@ namespace ProjectNoName.Entities.Concrete
         public int UserId { get; set; }
         public int? ParentId { get; set; }
         public User User { get; set; }
-        public List<Comment> Comments { get; set; }
         public Post Parent { get; set; }
         public virtual ICollection<Post> SubPosts { get; set; }
+        public virtual ICollection<Like> Likes { get; set; }
 
     }
 }

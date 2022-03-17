@@ -1,9 +1,10 @@
 ﻿using ProjectNoName.Entities.Concrete;
 using ProjectNoName.Core.Data.Abstract;
+using ProjectNoName.Entities;
 
 namespace ProjectNoName.Repository.EntityFramework.Abstract
 {
-    public interface ICommentRepository : IEfBaseRepository<Comment>
+    public interface IRelationShipRepository : IEfBaseRepository<RelationShip>
     {
 
     }

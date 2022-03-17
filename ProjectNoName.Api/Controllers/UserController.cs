@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ProjectNoName.Business.Abstract;
 using ProjectNoName.Business.Dto;
+using ProjectNoName.Core.Results;
 using ProjectNoName.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -27,13 +28,15 @@ namespace ProjectNoName.Api.Controllers
         [HttpGet()]
         public async Task<IActionResult> GetAll()
         {
-            return Ok(await _userService.GetAllQueryable().Include(x=>x.Posts).Include(x=>x.Followed).Include(x=>x.Followers).ToListAsync());
+            return Ok(await _userService.GetUserList());
         }
 
         [HttpPost]
         public async Task<IActionResult> Insert([FromBody] User user)
         {
-            return Ok(await _userService.Insert(user));
+            var insertData = await _userService.Insert(user);
+
+            return Ok(new Result(true, "User Registered."));
         }
 
         [HttpPost("Register")]
@@ -41,5 +44,6 @@ namespace ProjectNoName.Api.Controllers
         {
             return Ok(await _userService.Insert(_mapper.Map<User>(userRegisterDto)));
         }
+
     }
 }

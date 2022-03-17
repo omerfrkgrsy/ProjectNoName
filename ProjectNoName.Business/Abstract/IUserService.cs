@@ -10,6 +10,6 @@ namespace ProjectNoName.Business.Abstract
 {
     public interface IUserService:IBaseService<User>
     {
-
+        Task<List<User>> GetUserList();
     }
 }

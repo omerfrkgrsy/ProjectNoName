@@ -10,8 +10,8 @@ namespace ProjectNoName.Business.Dto
     {
         public string Name { get; set; }
         public string Surname { get; set; }
-        public string Pasword { get; set; }
-        public string RePasword { get; set; }
+        public string Password { get; set; }
+        public string RePassword { get; set; }
         public string Email { get; set; }
     }
 }

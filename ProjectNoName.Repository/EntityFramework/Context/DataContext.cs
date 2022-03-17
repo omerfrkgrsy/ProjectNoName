@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using ProjectNoName.Entities;
 using ProjectNoName.Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ namespace ProjectNoName.Repository.EntityFramework.Context
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<RelationShip> RelationShips { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Like> Likes { get; set; }
 
         public override int SaveChanges()
         {
@@ -31,19 +35,27 @@ namespace ProjectNoName.Repository.EntityFramework.Context
                 b.HasMany(j => j.SubPosts).WithOne(j => j.Parent).HasForeignKey(j => j.ParentId);
             });
 
-            modelBuilder.Entity<Comment>(b =>
+            modelBuilder.Entity<RelationShip>(b =>
             {
                 b.HasKey(x => x.Id);
-                b.HasOne(p => p.Post).WithMany(t => t.Comments).HasForeignKey(p => p.PostId);
-                b.HasOne(p => p.User).WithMany(t => t.Comments).HasForeignKey(p => p.UserId);
+                b.HasOne(p => p.Follewer).WithMany(t => t.Followers).HasForeignKey(p => p.FollewerId);
+                b.HasOne(p => p.Follewed).WithMany(t => t.Followed).HasForeignKey(p => p.FollowedId);
             });
 
             modelBuilder.Entity<User>(b =>
             {
                 b.HasKey(x => x.Id);
-                b.HasMany(x => x.Followers);
-                b.HasMany(x => x.Followed);
             });
+
+            modelBuilder.Entity<Like>(b =>
+            {
+                b.HasKey(x => x.Id);
+                b.HasKey(x => x.PostId);
+                b.HasOne(p => p.User).WithMany(t => t.Likes).HasForeignKey(p => p.Id);
+                b.HasOne(p => p.Post).WithMany(t => t.Likes).HasForeignKey(p => p.PostId);
+            });
+
+
 
         }
     }

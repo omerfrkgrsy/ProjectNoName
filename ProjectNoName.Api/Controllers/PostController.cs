@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ProjectNoName.Business.Abstract;
@@ -18,9 +19,11 @@ namespace ProjectNoName.Api.Controllers
     public class PostController : ControllerBase
     {
         readonly IPostService _service;
-        public PostController(IPostService service)
+        readonly IMapper _mapper;
+        public PostController(IPostService service, IMapper mapper)
         {
             _service = service;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -31,9 +34,9 @@ namespace ProjectNoName.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Insert([FromBody] Post post)
+        public async Task<IActionResult> Insert([FromBody] PostCreateDto post)
         {
-            var insertData = await _service.Insert(post);
+            var insertData = await _service.Insert(_mapper.Map<Post>(post));
 
             return Ok(new Result(true,"Post Added."));
         }

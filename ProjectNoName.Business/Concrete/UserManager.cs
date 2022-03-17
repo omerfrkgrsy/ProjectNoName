@@ -7,6 +7,9 @@ using System.Text;
 using System;
 using System.Linq;
 using System.Globalization;
+using ProjectNoName.Business.Dto;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjectNoName.Business.Concrete
 {
@@ -58,6 +61,12 @@ namespace ProjectNoName.Business.Concrete
                 userName = realUser + rand;
             }
             return userName;
+        }
+
+        public async Task<List<User>> GetUserList() 
+        { 
+            return await _userRepository.All().Include(x => x.Followed).Include(x => x.Followers).ToListAsync();
+
         }
     }
 }
